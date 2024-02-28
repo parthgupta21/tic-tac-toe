@@ -43,6 +43,8 @@ export const TicTacToe = () => {
     }
 
     const checkWin = () => {
+
+        
         if (data[0] === data[1] && data[1] === data[2] && data[2] !== "") {
             won(data[2]);
         }
@@ -67,6 +69,10 @@ export const TicTacToe = () => {
         else if (data[2] === data[4] && data[4] === data[6] && data[6] !== "") {
             won(data[6]);
         }
+        else if (checkForTie())
+        {
+            won(null);
+            }
 
     }
 
@@ -75,9 +81,23 @@ export const TicTacToe = () => {
         if (winner === "x") {
             titleRef.current.innerHTML = `Congratulation: <img src = ${cross_icon}> wins`;
         }
-        else {
+        else if (winner === "o") {
             titleRef.current.innerHTML = `Congratulation: <img src = ${circle_icon}> wins`;
         }
+        else {
+            titleRef.current.innerHTML = `It's a Tie!`
+        }
+    }
+
+    const checkForTie = () => {
+        for (let i = 0; i < data.length; i++)
+        {
+            if (data[i] === "")
+            {
+                return false;
+            }
+        }
+        return true;
     }
     const reset = () => {
         setLock(false);
